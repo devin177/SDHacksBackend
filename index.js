@@ -1,7 +1,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const db = require('./queries')
-const firebase = require('./firebase')
+const db = require('./functions/queries')
+const firebase = require('./functions/firebase')
+const functions = require('firebase-functions')
 const app = express()
 const port = 5000
 
@@ -32,3 +33,5 @@ app.get('/api/notes/title', db.getNotesByTitle)
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
+
+exports.app = functions.https.onRequest(app);
